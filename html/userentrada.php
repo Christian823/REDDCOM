@@ -21,24 +21,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/searchjs.js"></script>
-    <script src="../js/validaciontabla.js"></script>
+    <script src="../js/validation.js"></script>
     <title>Pagina de Entrada</title>
 </head>
 <body>
-    <?php if (!empty($mensaje)) : ?>
-        <div class="ventana">
-        <h3>Comentario </h3>
-        <?php echo $mensaje; ?>
-        <a href="user.php"><button class="cerrar">&times;</button></a>                                
-        </div>
-        <div class="overlay"></div>
-    <?php endif; ?>
-    <div class="container">
+        <?php if (!empty($mensaje)) : ?>
+            <div class="ventana">
+            <h3>Comentario </h3>
+            <?php echo $mensaje; ?>
+            <a href="user.php"><button class="cerrar">&times;</button></a>                                
+            </div>
+            <div class="overlay"></div>
+        <?php endif; ?>
+        <div class="container">
         <header>
             <img class="logo" src="../img/logo.png" alt="logo de la empresa">
             <h3>Bienvenido <?php echo $nombre," ", $apellidos; ?></h3>
         </header>
-        <form action="../php/entrada.php" method="post" enctype="multipart/form-data">
+        <form action="../php/entrada.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" >
             <fieldset class="informacion">
                 <label for="proyectos">Elegir proyecto: </label>
                 <select name="op-proyectos" id="op-proyectos" required>

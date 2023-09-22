@@ -246,6 +246,18 @@ datos tr.noSearch td {
   }
 }
 
+.button-info,
+.button-auth{
+  border: none;
+  background-color: #fff;
+  color: #444;
+  border-radius: 10rem;
+  cursor: pointer;
+  width: 100px;
+  padding: 0;
+  margin: 0;
+}
+
 /* Estilos para hacer el botón aún más pequeño en pantallas muy pequeñas */
 @media (max-width: 480px) {
   .ventana {
@@ -256,8 +268,6 @@ datos tr.noSearch td {
   }
 }
 
-/*Sin ordenar
-
 .tabla {
   border:1px solid #ccc;
   padding:10px;
@@ -265,26 +275,22 @@ datos tr.noSearch td {
   overflow-y: scroll;
   height: 300px;
   width: 100%;
+  margin-bottom: 5px;
 }
 
 .tabla .encabezados th{
   border-right:1px solid #ccc;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .tabla table{
   width: 100%;
+
 }
 
 .tabla td {
   padding:5px;
-}
-
-.tabla tr.noSearch {
-  background:White;font-size:0.8em;
-}
-
-.tabla tr.noSearch td {
-  padding-top:10px;text-align:right;
 }
 
 .hide {
@@ -294,6 +300,14 @@ datos tr.noSearch td {
 .red {
   color:Red;
 }
+.oculta{
+  display: none;
+} 
+
+
+/*Sin ordenar
+
+
 
 @media (max-width: 480px) {
 
@@ -325,19 +339,8 @@ datos tr.noSearch td {
     vertical-align: middle;
   }
 
-.button-comentario,
-.button-autorizacion,
-.button-reportes{
-  border: none;
-  background-color: #fff;
-  color: #444;
-  border-radius: 10rem;
-  cursor: pointer;
-  padding: 5px;
-}
-.oculta{
-  display: none;
-}
+
+
 .overlay {
   position: absolute;
   top: 0;

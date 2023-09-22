@@ -22,7 +22,11 @@ if ($count > 0) {
         $horaEntrada = date("H:i");
         $fecha = date("Y-m-d");
         $proyecto = $_POST["op-proyectos"];
-        $equipoSeleccionado = $_POST["seleccionar"];
+        
+        $equipoSeleccionado = isset($_POST["seleccionar"]) && is_array($_POST["seleccionar"]) ? $_POST["seleccionar"] : [];
+
+        $equipoSeleccionadoString = !empty($equipoSeleccionado) ? implode(",", $equipoSeleccionado) : '';
+
         $anexo_contenido = file_get_contents($_FILES['anexo']['tmp_name']);
         $comentarios = $_POST["comentarios"];
         $nombre = $_SESSION['firstName'];
@@ -30,11 +34,10 @@ if ($count > 0) {
         $user = $_SESSION['usuario'];
 
         $sql = "INSERT INTO user (proyecto, equipo, anexo, comentario, horaEntrada, fecha, firstName, lastName, user) 
-        VALUES ('$proyecto', '" . implode(",", $equipoSeleccionado) . "', ?, '$comentarios', '$horaEntrada', ?, ?, ?, ?)";
+        VALUES ('$proyecto', ?, ?, ?, '$horaEntrada', ?, ?, ?, ?)";
 
         if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("sssss", $anexo_contenido, $fecha, $nombre, $apellidos, $user);
-
+            $stmt->bind_param("sssssss", $equipoSeleccionadoString, $anexo_contenido, $comentarios, $fecha, $nombre, $apellidos, $user);
 
             if ($stmt->execute()) {
                 header("Location:../html/user.php");

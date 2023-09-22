@@ -13,6 +13,7 @@
         header("Location: login.php"); 
         exit;
     }
+    
     $nombre = $_SESSION['firstName'];
     $apellidos = $_SESSION['lastName'];
 ?>

@@ -1,28 +1,29 @@
 <?php
-session_start();
+    require '../php/connect.php';
+    require '../php/login.php';
 
-if (isset($_SESSION['firstName']) && isset($_SESSION['lastName'])) {
-    if ($_SESSION['account_type'] === 'user') {
-        header("location: user.php");
+    if (isset($_SESSION['firstName']) && isset($_SESSION['lastName'])) {
+        if ($_SESSION['account_type'] === 'user') {
+            header("location: user.php");
+            exit;
+        }
+    }
+
+    if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
+        header("Location: login.php"); 
         exit;
     }
-  }
 
-if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
-    header("Location: login.php"); 
-    exit;
-}
-
-$nombre = $_SESSION['firstName'];
-$apellidos = $_SESSION['lastName'];
+    $nombre = $_SESSION['firstName'];
+    $apellidos = $_SESSION['lastName'];
 
 ?>
 <?php
     require '../php/connect.php';
     $db = $conn;
-    $tableName = "entrys";
-    $columns = ['id','firstName', 'lastName','horaLlegada',
-    'horaSalida','anexo','comentarios','reportes' ];
+    $tableName = "user";
+    $columns = ['id','firstName', 'lastName','proyecto','equipo','fecha','horaEntrada',
+    'horaSalida','comentario','comentario2','hextra'];
     $fetchData = fetch_data($db, $tableName, $columns);
 
     function fetch_data($db, $tableName, $columns){
@@ -57,30 +58,26 @@ $apellidos = $_SESSION['lastName'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Administrador</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <header>
-                <img src="img/logo.png" alt="logo de la empresa">
-            </header>
-        </div>       
+        <header>
+            <img class="logo" src="../img/logo.png" alt="logo de la empresa">
             <h3>Bienvenido <?php echo $nombre," ", $apellidos; ?></h3>
+        </header>
                         <?php echo $deleteMsg??''; ?>
                         <div class="tabla">
-                            <table> 
+                            <table>
                             <thead class ="encabezados">
-                                <th>S.N</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Entrada</th>
                                 <th>Salida</th>
-                                <th>Anexo</th>
-                                <th>Comentarios</th>
-                                <th>Autorización</th>
-                                <th>Reportes</th>
-                            </thead>
+                                <th>Fecha</th>
+                                <th>Autorizar</th>
+                                <th>Información</th>
+                            </thead>     
                             <tbody>
                             <?php
                                 if (is_array($fetchData)) {
@@ -88,61 +85,32 @@ $apellidos = $_SESSION['lastName'];
                                     foreach ($fetchData as $data) {
                                         ?>
                                         <tr>
-                                            <td><?php echo $sn; ?></td>
                                             <td><?php echo $data['firstName'] ?? ''; ?></td>
                                             <td><?php echo $data['lastName'] ?? ''; ?></td>
-                                            <td><?php echo date('H:i', strtotime($data['horaLlegada'])) ?? ''; ?></td>
+                                            <td><?php echo date('H:i', strtotime($data['horaEntrada'])) ?? ''; ?></td>
                                             <td><?php echo date('H:i', strtotime($data['horaSalida'])) ?? ''; ?></td>
+                                            <td><?php echo date('Y-m-d', strtotime($data['fecha'])) ?? ''; ?></td>
                                             <td>
-                                            <a href="Logica/descargar_archivo.php?id=<?php echo $data['id']; ?>" class="button-descargar">Descargar</a>
+                                                <button class="button-auth">Autorizar</button>
                                             </td>
                                             <td>
-                                                <button class="button-comentario">Comentario</button>
+                                                <button class="button-info">Información</button>
                                                 <div class="ventana oculta">
                                                     <button class="cerrar-ventana">&times;</button>
-                                                    <h3>Comentario </h3>
-                                                    <?php echo $data['comentarios'] ?? ''; ?>                                        
-                                                </div>
-                                                <div class="overlay oculta"></div>
-                                            </td>
-                                            <td>
-                                                <button class="button-autorizacion">Autorizar</button>
-                                                
-                                            </td>
-                                            <td>
-                                                <button class="button-reportes">Reporte</button>
-                                                <div class="ventana oculta">
-                                                    <button class="cerrar-ventana">&times;</button>
-                                                    <h3>Reporte</h3>
-                                                     <?php 
-                                                     if (empty($data['reportes'])) {
-                                                     ?>
-                                                     <form action="" method="post">
-                                                        <textarea
-                                                            id="reportes"
-                                                            name="reportes"
-                                                            rows="3"
-                                                            cols="30"
-                                                            placeholder="Ingresa alguna observacion"
-                                                        ></textarea>
-                                                    <input type="submit" value="Enviar" />
-                                                     </form>
-                                                    <?php
-                                                    }else{
-                                                        echo $data['id'];
-                                                    }
-                                                    ?>
+                                                    <h3>Comentarios</h3>
+                                                    <?php echo $data['comentario'] ?? ''; ?>
+                                                    <?php echo $data['comentario2'] ?? ''; ?>                                           
                                                 </div>
                                                 <div class="overlay oculta"></div>
                                             </td>
                                         </tr>
                                         <?php
-                                        $sn++;
+                                        $sn++; 
                                     }
                                 } else {
                                     ?>
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="5">
                                             <?php echo $fetchData; ?>
                                         </td>
                                     </tr>
@@ -150,10 +118,8 @@ $apellidos = $_SESSION['lastName'];
                                 }
                                 ?>
                             </tbody>
-                            </table>
-
                             <script>
-                                const botones = document.querySelectorAll(".button-comentario, .button-reportes");
+                                const botones = document.querySelectorAll(".button-info");
                                 const ventanas = document.querySelectorAll(".ventana");
                                 const btnCerrarVentana = document.querySelectorAll('.cerrar-ventana');
                                 const overlay = document.querySelectorAll('.overlay');
@@ -163,29 +129,27 @@ $apellidos = $_SESSION['lastName'];
                                     const index = Array.from(botones).indexOf(this);
                                     ventanas[index].classList.remove("oculta");
                                     overlay[index].classList.remove("oculta");
-                                };
+                                    };
 
                                 const cerrarVentana = function () {
                                     const index = Array.from(btnCerrarVentana).indexOf(this);
                                     ventanas[index].classList.add("oculta");
                                     overlay[index].classList.add("oculta");
-                                };
+                                    };
 
                                 botonesDescarga.forEach(button => {
-                                button.addEventListener('click', function (e) {
+                                    button.addEventListener('click', function (e) {
                                     e.preventDefault();
                                     window.open(this.getAttribute('href'), '_blank');
+                                        });
                                     });
-                                });
 
                                 botones.forEach(button => button.addEventListener('click', abrirVentana));
                                 btnCerrarVentana.forEach(btnCerrar => btnCerrar.addEventListener("click", cerrarVentana));
                             </script>
-
-                            
-                            
+                            </table>
                     </div>
-                    <a href="Logica/cerrarsesion.php">Cerrar Sesión</a>
+                    <a href="../php/logout.php">Cerrar Sesión</a>
     </div>
 </body>
                                 

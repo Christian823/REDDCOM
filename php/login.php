@@ -24,7 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("location: ../html/user.php");
                 exit;
             }
+        } else {
+            header("location: ../html/login.php");  // Corrección aquí
+            exit;
         }
     }
-}      
+}     
 ?>
