@@ -23,7 +23,7 @@
     $db = $conn;
     $tableName = "user";
     $columns = ['id','firstName', 'lastName','proyecto','equipo','fecha','horaEntrada',
-    'horaSalida','comentario','comentario2','hextra'];
+    'horaSalida','comentario','comentario2','hextra','anexo'];
     $fetchData = fetch_data($db, $tableName, $columns);
 
     function fetch_data($db, $tableName, $columns){
@@ -97,9 +97,15 @@
                                                 <button class="button-info">Información</button>
                                                 <div class="ventana oculta">
                                                     <button class="cerrar-ventana">&times;</button>
-                                                    <h3>Comentarios</h3>
-                                                    <?php echo $data['comentario'] ?? ''; ?>
-                                                    <?php echo $data['comentario2'] ?? ''; ?>                                           
+                                                    <h3 class="elh3">INFORMACION GENERAL</h3>
+                                                    <div class="informacion-desc">
+                                                    <div class="info-box"><b>Proyecto: </b><?php echo $data['proyecto'] ?? ''; ?> </div> 
+                                                    <div class="info-box"><b>Nombre: </b><?php echo $data['firstName'] ?? ''; ?> </div>
+                                                    <div class="info-box"><b>Equipo: </b><?php echo $data['equipo'] ?? ''; ?> </div> 
+                                                    <div class="info-box"><b>Comentario: </b><?php echo $data['comentario'] ?? ''; ?> </div>
+                                                    <div class="info-box"><b>Comentario2: </b><?php echo $data['comentario2'] ?? ''; ?> </div> 
+                                                    <div class="info-anex"><b>Anexos: </b><button class="button-anex">Descargar<?php echo $Data['anexo'] ?? ''; ?></button></div>
+                                                    </div>                                  
                                                 </div>
                                                 <div class="overlay oculta"></div>
                                             </td>

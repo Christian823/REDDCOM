@@ -186,7 +186,7 @@ a {
 
 .cerrar-ventana {
   position: fixed;
-  top: -25%;
+  top: -10%;
   right: -30%;
   font-size: 3rem;
   color: white;
@@ -247,7 +247,7 @@ datos tr.noSearch td {
 }
 
 .button-info,
-.button-auth{
+.button-auth {
   border: none;
   background-color: #fff;
   color: #444;
@@ -269,42 +269,67 @@ datos tr.noSearch td {
 }
 
 .tabla {
-  border:1px solid #ccc;
-  padding:10px;
-  font-size:16px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
   overflow-y: scroll;
   height: 300px;
   width: 100%;
   margin-bottom: 5px;
 }
 
-.tabla .encabezados th{
-  border-right:1px solid #ccc;
+.tabla .encabezados th {
+  border-right: 1px solid #ccc;
   padding-right: 10px;
   padding-left: 10px;
 }
 
-.tabla table{
+.tabla table {
   width: 100%;
-
 }
 
 .tabla td {
-  padding:5px;
+  padding: 5px;
 }
 
 .hide {
-  display:none;
+  display: none;
 }
 
 .red {
-  color:Red;
+  color: Red;
 }
-.oculta{
+.oculta {
   display: none;
-} 
+}
 
+.elh3 {
+  border-bottom: 3px solid #3b3b4f;
+  padding-bottom: 15px;
+  color: #dfdfe2;
+  font-family: cursive;
+}
 
+.info-box {
+  margin: 10px;
+  display: flex;
+  align-items: start;
+  padding: 10px;
+}
+
+.button-anex {
+  width: 100px;
+  height: 30px;
+  size: 25px;
+  margin-left: 20px;
+  margin-top: 0px;
+  padding: 0;
+}
+.info-anex {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+}
 /*Sin ordenar
 
 
