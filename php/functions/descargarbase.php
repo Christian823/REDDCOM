@@ -31,8 +31,19 @@
 
     // Autoajuste de altura de fila
     foreach (range(1, $row - 1) as $rowIndex) {
-        $sheet->getRowDimension($rowIndex)->setRowHeight(-1); // Autoajuste de altura
+        $sheet->getRowDimension($rowIndex)->setRowHeight(-1);
+
+        $columnas = range('A', 'J'); // Obtener un rango de letras de A a J
+
+$ancho = 20; // Ancho deseado
+
+foreach ($columnas as $columna) {
+    $sheet->getColumnDimension($columna)->setWidth($ancho);
+}
+         // Autoajuste de altura
     }
+
+
 
     $writer = new Xlsx($spreadsheet);
     $filename = "registros.xlsx";
