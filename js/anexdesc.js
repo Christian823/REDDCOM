@@ -5,7 +5,7 @@ function downloadImage(imageData) {
     const anchor = document.createElement('a');
     anchor.href = blobUrl;
     anchor.target = '_blank';
-    anchor.download = 'anexo.jpg';  // Nombre del archivo de imagen (puedes personalizarlo)
+    anchor.download = 'anexo.jpg';
     anchor.click();
 }
 

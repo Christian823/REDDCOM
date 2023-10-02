@@ -1,4 +1,4 @@
-const botones = document.querySelectorAll(".button-info,.button-report");
+const botones = document.querySelectorAll(".button-info,.button-herra");
 const ventanas = document.querySelectorAll(".ventana");
 const btnCerrarVentana = document.querySelectorAll('.cerrar-ventana');
 const overlay = document.querySelectorAll('.overlay');

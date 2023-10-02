@@ -2,7 +2,7 @@
     require '../php/forms/log.php';
 
     if (isset($_SESSION['firstName']) && isset($_SESSION['lastName'])) {
-        if ($_SESSION['account_type'] === 'admin') {
+        if ($_SESSION['account_type'] === 'admin' || $_SESSION['account_type'] === 'mod') {
             header("location: admin.php");
             exit;
         } elseif ($_SESSION['account_type'] === 'user') {

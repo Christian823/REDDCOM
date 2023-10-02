@@ -7,7 +7,7 @@
         $password = isset($_POST['password']) ? $_POST['password'] : '';
 
         if (!empty($usuario) && !empty($password)) {
-            $q = "SELECT password, firstName, lastName, account_type FROM registration WHERE usuario = '$usuario'";
+            $q = "SELECT password, firstName, lastName, account_type, proye FROM users WHERE usuario = '$usuario'";
             $consulta = mysqli_query($conn, $q);
             $result = mysqli_fetch_assoc($consulta);
 
@@ -15,9 +15,10 @@
                 $_SESSION['usuario'] = $usuario;
                 $_SESSION['firstName'] = $result['firstName'];
                 $_SESSION['lastName'] = $result['lastName'];
-                $_SESSION['account_type'] = $result['account_type']; 
+                $_SESSION['account_type'] = $result['account_type'];
+                $_SESSION['proye'] = $result['proye'];
             
-                if ($result['account_type'] === 'admin') {
+                if ($result['account_type'] === 'admin' || $result['account_type'] === 'mod') {
                     header("location: ../../pages/admin.php");
                     exit;
                 } elseif ($result['account_type'] === 'user') {
@@ -25,7 +26,7 @@
                     exit;
                 }
             } else {
-                header("location: ../../pages/login.php");  // Corrección aquí
+                header("location: ../../pages/login.php");
                 exit;
             }
         }

@@ -1,7 +1,7 @@
 <?php
     require 'conn.php';
     $db = $conn;
-    $tableName = "empleados";
+    $tableName = "mcuadrilla";
     $columns = ["empleados"];
 
     $fetchData = fetch_data($db, $tableName, $columns);

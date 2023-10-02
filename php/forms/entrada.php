@@ -4,8 +4,7 @@
     $fecha = date("Y-m-d");
     $user = $_SESSION['usuario'];
 
-    // Consulta para verificar si ya existe un registro para el usuario y fecha actual
-    $sqlCheckExistence = "SELECT COUNT(*) FROM user WHERE fecha = ? AND user = ?";
+    $sqlCheckExistence = "SELECT COUNT(*) FROM registros WHERE fecha = ? AND user = ?";
     $stmtCheckExistence = $conn->prepare($sqlCheckExistence);
     $stmtCheckExistence->bind_param("ss", $fecha, $user);
     $stmtCheckExistence->execute();
@@ -23,7 +22,7 @@
             $proyecto = $_POST["op-proyectos"];
             
             $equipoSeleccionado = isset($_POST["seleccionar"]) && is_array($_POST["seleccionar"]) ? $_POST["seleccionar"] : [];
-            $equipoSeleccionadoString = !empty($equipoSeleccionado) ? implode(",", $equipoSeleccionado) : '';
+            $equipoSeleccionadoString = !empty($equipoSeleccionado) ? implode(",", $equipoSeleccionado) : '';            
             
             $anexo_contenido = file_get_contents($_FILES['anexo']['tmp_name']);
             $comentarios = $_POST["comentarios"];
@@ -31,8 +30,8 @@
             $apellidos = $_SESSION['lastName'];
             $user = $_SESSION['usuario'];
 
-            // Consulta preparada para la inserción de datos
-            $sqlInsert = "INSERT INTO user (proyecto, equipo, anexo, comentario, horaEntrada, fecha, firstName, lastName, user) 
+          
+            $sqlInsert = "INSERT INTO registros (proyecto, equipo, anexo, comentario, horaEntrada, fecha, firstName, lastName, user) 
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $conn->prepare($sqlInsert);
@@ -40,7 +39,7 @@
 
             if ($stmtInsert->execute()) {
                 header("Location:../../pages/user.php");
-                exit(); // Agregar exit para evitar ejecución adicional
+                exit();
             } else {
                 echo "Error al registrar la entrada: " . $stmtInsert->error;
             }

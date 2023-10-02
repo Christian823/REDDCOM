@@ -1,7 +1,7 @@
 <?php
     require 'conn.php';
     $db = $conn;
-    $tableName = "user";
+    $tableName = "registros";
     $columns = ['id','firstName','user', 'lastName','proyecto','equipo','fecha','horaEntrada',
     'horaSalida','comentario','comentario2','hextra','anexo','anexo2'];
     $fetchData = fetch_data($db, $tableName, $columns);
@@ -22,7 +22,7 @@
         $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
         $msg= $row;
         } else {
-        $msg= "Sin entradas"; 
+        $msg= "No hay registros"; 
         }
     }else{
         $msg= mysqli_error($db);

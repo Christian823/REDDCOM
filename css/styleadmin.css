@@ -73,7 +73,8 @@ form{
     padding: 0;
     margin: 0;
   }
-.button-base{
+.button-base,
+.button-herra{
   border: none;
   background-color: #28375dcc;
   color: #ffffff;
@@ -147,6 +148,7 @@ textarea {
 .links{
   margin-top: 15px;
   display: block;
+  margin-bottom: 15px;
 }
 datos {
   border: 1px solid #ccc;

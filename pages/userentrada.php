@@ -4,7 +4,7 @@
     require '../php/forms/entrada.php';
 
     if (isset($_SESSION['firstName']) && isset($_SESSION['lastName'])) {
-        if ($_SESSION['account_type'] === 'admin') {
+        if ($_SESSION['account_type'] === 'admin' || $_SESSION['account_type'] === 'mod') {
             header("location: admin.php");
             exit;
         }
@@ -43,10 +43,10 @@
                 <label for="proyectos">Elegir proyecto: </label>
                 <select name="op-proyectos" id="op-proyectos" required>
                     <?php
-                        if (is_array($enumOptions)) {
-                            foreach ($enumOptions as $proyecto) {
+                        if (is_array($fetchData2)) {
+                            foreach ($fetchData2 as $proyecto) {
                                 ?>
-                                    <option value="<?php echo $proyecto; ?>"><?php echo $proyecto; ?></option>     
+                                    <option value="<?php echo $proyecto['nombre']; ?>"><?php echo $proyecto['nombre']; ?></option>     
                                 <?php
                                 }
                             } 
