@@ -14,7 +14,7 @@ if (isset($_SESSION['firstName']) && isset($_SESSION['lastName'])) {
 $nombre = $_SESSION['firstName'];
 $apellidos = $_SESSION['lastName'];
 $usertype = $_SESSION['account_type'];
-$proyecto = $_SESSION['proye']; 
+$proyecto = $_SESSION['proyecto']; 
 
 $conn->close();
 

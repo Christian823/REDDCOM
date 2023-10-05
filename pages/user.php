@@ -23,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styleuser.css">
+    <script src="ubicacion.js"></script>
     <title>Pagina de Usuario</title>
 </head>
 <body>
@@ -33,6 +34,7 @@
         </header>
         <a href="userentrada.php"><button>Marcar Entrada</button></a>
         <a href="usersalida.php"><button>Marcar Salida</button></a>
+        <p id="ubicacion"></p>
         <a href="../php/functions/logout.php">Cerrar Sesión</a>
     </div>
 </body>

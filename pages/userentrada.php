@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../css/styleentrada.css">
     <script src="../js/searchjs.js"></script>
     <script src="../js/validation.js"></script>
+    <script src="../js/ubicacion.js"></script>
     <title>Pagina de Entrada</title>
 </head>
 <body>
@@ -89,7 +90,7 @@
                     </div>  
                 </fieldset> 
                 <label for="anexo">Inserte aqui el anexo:</label>
-                <input id="anexo" type="file" name="anexo" required />
+                <input id="anexo" type="file" accept="image/*" capture="camera" name="anexo" required/>
                 <label for="comentarios">Comentarios:</label>
                   <textarea
                     id="comentarios"
@@ -98,8 +99,10 @@
                     cols="30"
                     placeholder="Ingresa alguna observacion"
                   ></textarea>
-                  <input class= "sumbit "type="submit" value="Marcar Entrada">
-            </fieldset>
+                    <input type="hidden" name="latitud" id="latitud">
+                    <input type="hidden" name="longitud" id="longitud">
+                    <input class="sumbit" type="submit" value="Marcar Entrada"  onclick="obtenerUbicacion()" required>
+                    </fieldset>
         </form>
         <a href="../php/functions/logout.php">Cerrar Sesión</a>
     </div>
